@@ -5,7 +5,7 @@ typedef sf::Vector2f point;
 
 const float w=1000, h=800;
 sf::ContextSettings settings(0,0,8,2,0);
-sf::RenderWindow window(sf::VideoMode(w, h), "SFML works!", sf::Style::Default, settings);
+sf::RenderWindow window(sf::VideoMode(w, h), "drzewo works!", sf::Style::Default, settings);
 
 float rf(){
     return ((float)rand()) / ((float)RAND_MAX);
@@ -60,33 +60,17 @@ float toZerofy(float x, float en){
     return x+rfr(-0.4f, 0.4f)*bad;
 }
 
-point onAngle(float f){
-    return {cos(M_PI*2*f), sin(M_PI*2*f)};
-}
-
-void drawHalfCircle(point p, float rad, float rot, sf::Color color){
-    sf::ConvexShape circ;
-    circ.setFillColor(color);
-    circ.setPointCount(rad+1);
-    for(float i=0; i<rad; ++i)
-        circ.setPoint(i, rad*onAngle((i/2.f)/rad));
-    circ.setPoint(rad, {-rad, 0});
-    circ.rotate(-360.f*rot);
-    circ.setPosition(p);
-    window.draw(circ);
-}
-
 void drawTree(point p, float rot, float energy){
     if(energy<=0.f)
         return;
-    const float MAX_THICC=10;
+    const float MAX_THICK=10;
     const float MAX_LEN=20;
     const float MAX_ROT=0.05f;
     sf::Color color(255.f*energy*rfr(0.8f, 1.f),
             50+150.f*(1-energy)*rfr(0.8f, 1.f),
             0);
     Line trunk(p, rot,
-        MAX_THICC*chaos()*energy, MAX_LEN*chaos()*energy, color);
+        MAX_THICK*chaos()*energy, MAX_LEN*chaos()*energy, color);
     
     drawCircle(p, trunk.getThickness()/2.f,  color);
     
@@ -102,7 +86,7 @@ void drawTree(point p, float rot, float energy){
 
 int main()
 {
-	//window.setFramerateLimit(120);
+	window.setFramerateLimit(120);
     float en=0.0f;
     int seed=2137;
     while (window.isOpen())
