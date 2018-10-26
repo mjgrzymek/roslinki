@@ -56,7 +56,7 @@ float rsign(){
 
 float toZerofy(float x, float en){
     x-=floor(x);
-    float bad=min(sinf(x*M_PI)*en*2.f, 1.f);
+    float bad=min(sinf(x*M_PI)*en*2.f, 0.2f);
     return x+rfr(-0.4f, 0.4f)*bad;
 }
 
