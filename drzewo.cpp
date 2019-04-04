@@ -68,13 +68,12 @@ void drawTree(point p, float rot, float energy) {
 		drawCircle(p, trunk.getThickness() / 2.f, color);
 
 		int rs[] = {rand(), rand(), rand()};
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < 1+(rf()<0.3); ++i) {
 				drawTree(
 					trunk.endPoint(),
-					toZerofy(rot + rsign() * MAX_ROT * rf(), energy),
+					toZerofy(rot + rsign() * MAX_ROT * rfr(0.3, 0.7), energy),
 					energy - rfr(0.025, 0.035));
 				srand(rs[i]);
-				if (rf() > 0.2f) break;
 		}
 }
 
