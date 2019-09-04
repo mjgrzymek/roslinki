@@ -5,8 +5,9 @@ typedef sf::Vector2f point;
 
 const float WINDOW_WIDTH = 1000, WINDOW_HEIGHT = 800;
 sf::ContextSettings settings(0, 0, 8, 2, 0);
-sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "roslinki works!",
-                        sf::Style::Default, settings);
+sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+                        "roslinki works!", sf::Style::Default,
+                        settings);
 
 float RandFloat() { return ((float)rand()) / ((float)RAND_MAX); }
 float RandFloatRange(float a, float b) {
@@ -60,24 +61,24 @@ void DrawTree(point p, float rot, float energy) {
 
     DrawCircle(p, trunk.getThickness() / 2.f, color);
 
-    int rs[] = {rand(), rand(), rand()};
+    int branch_seeds[] = {rand(), rand(), rand()};
     for (int i = 0; i < 1 + (RandFloat() < 0.3) && i < 3; ++i) {
         DrawTree(trunk.endPoint(),
                  ToZero(rot + RandFloatRange(-MAX_ROT, MAX_ROT)),
                  energy - RandFloatRange(0.025, 0.05));
-        srand(rs[i]);
+        srand(branch_seeds[i]);
     }
 }
 
 int main() {
     window.setFramerateLimit(60);
-    float en = 0.f;
-    int seed = time(0);
+    float trunk_energy = 0.f;
+    int seed = 0;//time(0);
     while (window.isOpen()) {
-        en += 0.002;
-        if (en > 1) {
-            en = 0;
-            ++seed;
+        trunk_energy += 0.002;
+        if (trunk_energy > 1) {
+            trunk_energy = 0;
+            //++seed;
         }
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -85,7 +86,7 @@ int main() {
         }
         window.clear(sf::Color::Black);
         srand(seed);
-        DrawTree({WINDOW_WIDTH / 2, WINDOW_HEIGHT * 3 / 4}, 0, en);
+        DrawTree({WINDOW_WIDTH / 2, WINDOW_HEIGHT * 3 / 4}, 0, trunk_energy);
         window.display();
     }
 
