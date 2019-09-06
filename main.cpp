@@ -73,12 +73,12 @@ void DrawTree(point p, float rot, float energy) {
 int main() {
     window.setFramerateLimit(60);
     float trunk_energy = 0.f;
-    int seed = 0;//time(0);
+    int seed = time(0);
     while (window.isOpen()) {
         trunk_energy += 0.002;
         if (trunk_energy > 1) {
             trunk_energy = 0;
-            //++seed;
+            ++seed;
         }
         sf::Event event;
         while (window.pollEvent(event)) {
