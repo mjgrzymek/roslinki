@@ -1,4 +1,4 @@
-CPPFLAGS = -O3 -Wall -Wextra -Wshadow
+CXXFLAGS = -O3 -Wall -Wextra -Wshadow
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system 
 
 compilation:
