@@ -1,2 +1,5 @@
-CPPFLAGS = -O3 -lsfml-graphics -lsfml-window -lsfml-system -Wall -Wextra -Wshadow
-.DEFAULT_GOAL = main
+CPPFLAGS = -O3 -Wall -Wextra -Wshadow
+LIBS=-lsfml-graphics -lsfml-window -lsfml-system 
+
+compilation:
+	g++ -o main main.cpp $(LIBS)
